@@ -1,0 +1,11 @@
+<?php
+include ("bd.php");
+$id = $_COOKIE['id'];
+$query = mysqli_query($db,"SELECT * FROM users WHERE user_id='$id'");
+$row = mysqli_fetch_array($query, MYSQLI_ASSOC);
+$hashtags = split("&&&", $row['hashtag']);
+$i=0;
+$count = count($hashtags);
+while($i<$count){
+	$query = mysqli_query($db,"SELECT COUNT(*) FROM items WHERE hashtag = '$hashtags[$i]'");
+	
